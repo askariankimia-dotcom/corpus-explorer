@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+dist/
+data/
+corpus.json
+corpus.db
+corpus.db-*
+.env
+.env.*
+!.env.example
+.DS_Store

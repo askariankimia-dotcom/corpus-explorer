@@ -1,0 +1,20 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Frontend
+node_modules/
+dist/
+
+# Corpus files
+data/
+corpus.json
+corpus.db
+corpus.db-*
+
+# Local settings
+.env
+.env.*
+!.env.example
+.DS_Store
