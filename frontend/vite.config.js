@@ -7,6 +7,8 @@ export default defineConfig({
     proxy: {
       "/search": "http://127.0.0.1:8000",
       "/sources": "http://127.0.0.1:8000",
+      "/analyse": "http://127.0.0.1:8000",
+      "/reviews": "http://127.0.0.1:8000",
     },
   },
 });

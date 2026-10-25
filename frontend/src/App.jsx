@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { exportKwic } from "./exportKwic";
+import ParagraphAnalysis from "./ParagraphAnalysis";
+import SavedReviews from "./SavedReviews";
 
 function HighlightedText({ text, query, mode }) {
   const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -168,77 +171,87 @@ export default function App() {
             {data.mode === "whole_word" ? "Whole words" : "Partial matches"}.
             {" "}Coursebook: {data.source_file || "All coursebooks"}.
           </p>
-<h2>Key Word in Context</h2>
-<button
-  type="button"
-  onClick={() => exportKwic(data)}
-  disabled={data.kwic_results.length === 0}
->
-  Download displayed KWIC rows as CSV
-</button>
-<p>
-  Showing {data.kwic_results.length} of {data.total_occurrences} occurrences.
-</p>
 
-<div style={{ overflowX: "auto" }}>
-  <table style={{ width: "100%", borderCollapse: "collapse" }}>
-    <thead>
-      <tr>
-        <th style={{ padding: "8px", textAlign: "right" }}>
-          Left context
-        </th>
-        <th style={{ padding: "8px" }}>Match</th>
-        <th style={{ padding: "8px", textAlign: "left" }}>
-          Right context
-        </th>
-        <th style={{ padding: "8px", textAlign: "left" }}>
-          Source
-        </th>
-      </tr>
-    </thead>
+          <h2>Key Word in Context</h2>
 
-    <tbody>
-      {data.kwic_results.map((row) => (
-        <tr
-          key={`${row.source_file}:${row.paragraph_number}:${row.start}`}
-          style={{ borderBottom: "1px solid #aaa" }}
-        >
-          <td
-            style={{
-              padding: "8px",
-              textAlign: "right",
-              whiteSpace: "nowrap",
-            }}
+          <button
+            type="button"
+            onClick={() => exportKwic(data)}
+            disabled={data.kwic_results.length === 0}
           >
-            {row.left_context}
-          </td>
+            Download displayed KWIC rows as CSV
+          </button>
 
-          <td
-            style={{
-              padding: "8px",
-              textAlign: "center",
-              whiteSpace: "nowrap",
-            }}
-          >
-            <mark style={{ backgroundColor: "#ffe08a", color: "#222" }}>
-              {row.match}
-            </mark>
-          </td>
+          <p>
+            Showing {data.kwic_results.length} of {data.total_occurrences}{" "}
+            occurrences.
+          </p>
 
-          <td style={{ padding: "8px", whiteSpace: "nowrap" }}>
-            {row.right_context}
-          </td>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <thead>
+                <tr>
+                  <th style={{ padding: "8px", textAlign: "right" }}>
+                    Left context
+                  </th>
+                  <th style={{ padding: "8px" }}>Match</th>
+                  <th style={{ padding: "8px", textAlign: "left" }}>
+                    Right context
+                  </th>
+                  <th style={{ padding: "8px", textAlign: "left" }}>
+                    Source
+                  </th>
+                </tr>
+              </thead>
 
-          <td style={{ padding: "8px", textAlign: "left" }}>
-            {row.source_file} · Paragraph {row.paragraph_number}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
+              <tbody>
+                {data.kwic_results.map((row) => (
+                  <tr
+                    key={`${row.source_file}:${row.paragraph_number}:${row.start}`}
+                    style={{ borderBottom: "1px solid #aaa" }}
+                  >
+                    <td
+                      style={{
+                        padding: "8px",
+                        textAlign: "right",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {row.left_context}
+                    </td>
 
-<h2>Matching paragraphs</h2>
+                    <td
+                      style={{
+                        padding: "8px",
+                        textAlign: "center",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      <mark
+                        style={{
+                          backgroundColor: "#ffe08a",
+                          color: "#222",
+                        }}
+                      >
+                        {row.match}
+                      </mark>
+                    </td>
+
+                    <td style={{ padding: "8px", whiteSpace: "nowrap" }}>
+                      {row.right_context}
+                    </td>
+
+                    <td style={{ padding: "8px", textAlign: "left" }}>
+                      {row.source_file} · Paragraph {row.paragraph_number}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Matching paragraphs</h2>
+
           {data.results.map((record) => (
             <article
               key={`${record.source_file}:${record.paragraph_number}`}
@@ -257,12 +270,15 @@ export default function App() {
                 />
               </p>
 
+              <ParagraphAnalysis record={record} />
+
               <hr />
             </article>
           ))}
         </section>
       )}
+
+      <SavedReviews />
     </main>
   );
 }
-import { exportKwic } from "./exportKwic";

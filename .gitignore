@@ -11,3 +11,4 @@ corpus.db-*
 .env.*
 !.env.example
 .DS_Store
+/backups/

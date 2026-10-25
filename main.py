@@ -122,3 +122,9 @@ def search(
         "results": matches[:20],
         "kwic_results": kwic_results
     }
+from analysis_api import router as analysis_router
+
+app.include_router(analysis_router)
+from reviews_api import router as reviews_router
+
+app.include_router(reviews_router)
