@@ -1,14 +1,40 @@
+# Python virtual environments
 .venv/
+venv/
+
+# Python cache
 __pycache__/
-*.pyc
-node_modules/
-dist/
-data/
-corpus.json
-corpus.db
-corpus.db-*
+*.py[cod]
+
+# macOS
+.DS_Store
+
+# Environment variables / secrets
 .env
 .env.*
-!.env.example
-.DS_Store
-/backups/
+*.pem
+*.key
+
+# Node / frontend dependencies
+node_modules/
+frontend/node_modules/
+
+# Corpus and research data
+data/
+corpus.db
+corpus.json
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Backups
+backups/
+
+# Logs
+*.log
+
+# IDE files
+.idea/
+.vscode/
