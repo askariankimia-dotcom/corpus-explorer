@@ -1,4 +1,8 @@
-# Corpus Explorer
+## 🎥 Demo
+
+See Corpus Explorer in action:
+
+[▶ Watch the Corpus Explorer demo](demo/corpus-explorer-demo.mp4)
 
 A web-based research environment for **corpus linguistics, linguistic annotation, and AI-assisted language analysis**.
 
